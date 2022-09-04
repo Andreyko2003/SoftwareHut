@@ -7,22 +7,27 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
+
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+
 function FeaturedPost(props) {
+
   const { post } = props;
+  const url = '/' + post.id;
 
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href="#">
+      <CardActionArea component="a" href={url}>
         <Card sx={{ display: 'flex' }}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5">
               {post.title}
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">
-              {post.date}
+              {months[new Date(post.date).getMonth()]} {new Date(post.date).getDate()}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {post.description}
+              {post.description.slice(0, 100)}
             </Typography>
             <Typography variant="subtitle1" color="primary">
               Continue reading...

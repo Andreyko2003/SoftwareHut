@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+import {useNavigate} from 'react-router-dom'
 
 function MainFeaturedPost(props) {
   const { post } = props;
-
+  const url = '/' + post.id;
+  const navigate = useNavigate();
   return (
-    <Paper
+    <Paper onClick={() => navigate(url)}
       sx={{
         position: 'relative',
         backgroundColor: 'grey.800',
@@ -23,7 +24,7 @@ function MainFeaturedPost(props) {
       }}
     >
       {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+      {<img style={{ display: 'none' }} src={post.image} alt={post.imageLabel} />}
       <Box
         sx={{
           position: 'absolute',
@@ -49,9 +50,9 @@ function MainFeaturedPost(props) {
             <Typography variant="h5" color="inherit" paragraph>
               {post.description}
             </Typography>
-            <Link variant="subtitle1" href="#">
-              {post.linkText}
-            </Link>
+            <Typography variant="subtitle1">
+              Continue reading...
+            </Typography>
           </Box>
         </Grid>
       </Grid>
@@ -63,8 +64,7 @@ MainFeaturedPost.propTypes = {
   post: PropTypes.shape({
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    imageText: PropTypes.string.isRequired,
-    linkText: PropTypes.string.isRequired,
+    imageLabel: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
   }).isRequired,
 };
